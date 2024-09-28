@@ -53,7 +53,7 @@ const Bookings = () => {
             <th scope="col">#</th>
             <th scope="col">Room No</th>
             <th scope="col">Room Type</th>
-            <th scope="col">User Id</th>
+            {/* <th scope="col">User Id</th> */}
             <th scope="col">User Contact</th>
             <th scope="col">Check In</th>
             <th scope="col">Check Out</th>
@@ -67,7 +67,7 @@ const Bookings = () => {
                 <th scope="row">{index + 1}</th>
                 <td>{booking.roomNumber}</td>
                 <td>{booking.roomType}</td>
-                <td>{booking.userId}</td>
+                {/* <td>{booking.userId}</td> */}
                 <td>{booking.contactNo || "N/A"}</td> {/* Add userContact if available */}
                 <td>{booking.checkIn}</td>
                 <td>{booking.checkOut}</td>
