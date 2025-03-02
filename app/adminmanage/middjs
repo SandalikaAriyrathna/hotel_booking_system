@@ -1,0 +1,44 @@
+// middleware.js
+
+import { NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
+import { verifyToken } from "./lib/verifyToken";
+
+// Define protected routes
+const protectedRoutes = ["/adminmanage/dashboard"];
+
+export function middleware(req) {
+  const { pathname } = req.nextUrl;
+
+  // Check if the current path is a protected route
+  if (protectedRoutes.includes(pathname)) {
+    // Get the token from cookies (assuming JWT)
+
+    const authHeader = req.headers.get("authorization");
+    const body = req.body;
+
+    // Here, you can decode the JWT to check user roles or validate the token
+    if (body) {
+      return NextResponse.next(); // Allow access if the user is an admin
+    }
+    // if (decoded.role === "admin") {
+    //   return NextResponse.redirect(
+    //     "http://localhost:3000/adminmanage/dashboard"
+    //   ); // Allow access if the user is an admin
+    // }
+    if (!authHeader) {
+      // Redirect to login if not authenticated
+      return NextResponse.redirect("http://localhost:3000/");
+    }
+
+    const token = authHeader.split(" ")[1]; // Get the token from the header
+
+    if (!token) {
+      return NextResponse.redirect("http://localhost:3000/");
+    } else {
+      return NextResponse.redirect("http://localhost:3000/"); // Redirect if not an admin
+    }
+  }
+
+  return null;
+}

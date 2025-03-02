@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 
 import Sidebar from "./sidebar";
 
@@ -29,7 +30,25 @@ const faqData = {
 };
 const { faqOne } = faqData;
 
-const Roomdetailscontainer = () => {
+const Roomdetailscontainer = (props) => {
+  const [rooms, setRooms] = useState([]);
+
+  const rT = rooms.roomType;
+
+  useEffect(() => {
+    const fetchRooms = async () => {
+      try {
+        const response = await fetch(`/api/rooms?id=${props.roomId}`);
+        const data = await response.json();
+        setRooms(data);
+      } catch (error) {
+        console.error("Error fetching rooms:", error);
+      }
+    };
+
+    fetchRooms();
+  }, []);
+
   return (
     <>
       <div className="room__details section-padding">
@@ -38,60 +57,208 @@ const Roomdetailscontainer = () => {
             <Sidebar />
             <div className="col-xl-9 col-lg-8">
               <div className="room__details-right">
-                <div className="room__details-right-content">
-                  <h3 className="mb-25">
-                    Luxury Room is the best online room for luxury hotels
-                  </h3>
-                  <p className="mb-25">
-                    Praesent non ullamcorper ligula. Proin a mi vitae massa
-                    lacinia sollicitudin eget eu ante. Lorem ipsum dolor sit
-                    amet, consectetur adipiscing elit. Pellentesque consectetur
-                    rhoncus lobortis. Curabitur sit amet velit sagittis,
-                    pellentesque diam euismod, faucibus quam. Cras non rhoncus
-                    ipsum. Quisque mattis arcu metus, a fermentum justo semper
-                    in. Aliquam egestas metus at nunc aliquam
-                  </p>
-                  <p className="m-0">
-                    id molestie ex ornare. Aliquam id arcu vel sem pretium
-                    porttitor non maximus diam. Quisque urna turpis, euismod sed
-                    elementum vel, pellentesque eu eros. Orci varius natoque
-                    penatibus et magnis dis parturient montes, nascetur
-                    ridiculus musc.
-                  </p>
-                  <div className="row mt-35 mb-35">
-                    <div className="col-sm-6 sm-mb-30">
-                      <img 
-                        className="img__full"
-                        src="img/hotel/rooms/room1/room1_1.jpeg"
-                        alt=""
-                      />
-                    </div>
-                    <div className="col-sm-6">
-                      <img
-                        className="img__full"
-                        src="img/hotel/rooms/room1/room1-3.jpeg"
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                  <h3 className="mb-25">Special check-in instructions</h3>
-                  <p className="mb-25">
-                    Praesent non ullamcorper ligula. Proin a mi vitae massa
-                    lacinia sollicitudin eget eu ante. Lorem ipsum dolor sit
-                    amet, consectetur adipiscing elit. Pellentesque consectetur
-                    rhoncus lobortis. Curabitur sit amet velit sagittis,
-                    pellentesque diam euismod, faucibus quam. Cras non rhoncus
-                    ipsum. Quisque mattis arcu metus, a fermentum justo semper
-                    in. Aliquam egestas metus at nunc aliquam
-                  </p>
-                  <p className="m-0">
-                    id molestie ex ornare. Aliquam id arcu vel sem pretium
-                    porttitor non maximus diam. Quisque urna turpis, euismod sed
-                    elementum vel, pellentesque eu eros. Orci varius natoque
-                    penatibus et magnis dis parturient montes, nascetur
-                    ridiculus musc.
-                  </p>
-                </div>
+                {(() => {
+                  if (rooms.roomType === "Luxury Room") {
+                    return (
+                      <>
+                        {/* Room details Luxury*/}
+                        <div className="room__details-right-content">
+                          <h3 className="mb-25">
+                            Luxury Room is the best online room for luxury
+                            hotels
+                          </h3>
+                          <p className="mb-25">
+                            Praesent non ullamcorper ligula. Proin a mi vitae
+                            massa lacinia sollicitudin eget eu ante. Lorem ipsum
+                            dolor sit amet, consectetur adipiscing elit.
+                            Pellentesque consectetur rhoncus lobortis. Curabitur
+                            sit amet velit sagittis, pellentesque diam euismod,
+                            faucibus quam. Cras non rhoncus ipsum. Quisque
+                            mattis arcu metus, a fermentum justo semper in.
+                            Aliquam egestas metus at nunc aliquam
+                          </p>
+                          <p className="m-0">
+                            id molestie ex ornare. Aliquam id arcu vel sem
+                            pretium porttitor non maximus diam. Quisque urna
+                            turpis, euismod sed elementum vel, pellentesque eu
+                            eros. Orci varius natoque penatibus et magnis dis
+                            parturient montes, nascetur ridiculus musc.
+                          </p>
+                          <div className="row mt-35 mb-35">
+                            <div className="col-sm-6 sm-mb-30">
+                              <img
+                                className="img__full"
+                                src="img/hotel/rooms/room1/room1_1.jpeg"
+                                alt=""
+                              />
+                            </div>
+                            <div className="col-sm-6">
+                              <img
+                                className="img__full"
+                                src="img/hotel/rooms/room1/room1-3.jpeg"
+                                alt=""
+                              />
+                            </div>
+                          </div>
+                          <h3 className="mb-25">
+                            Special check-in instructions
+                          </h3>
+                          <p className="mb-25">
+                            Praesent non ullamcorper ligula. Proin a mi vitae
+                            massa lacinia sollicitudin eget eu ante. Lorem ipsum
+                            dolor sit amet, consectetur adipiscing elit.
+                            Pellentesque consectetur rhoncus lobortis. Curabitur
+                            sit amet velit sagittis, pellentesque diam euismod,
+                            faucibus quam. Cras non rhoncus ipsum. Quisque
+                            mattis arcu metus, a fermentum justo semper in.
+                            Aliquam egestas metus at nunc aliquam
+                          </p>
+                          <p className="m-0">
+                            id molestie ex ornare. Aliquam id arcu vel sem
+                            pretium porttitor non maximus diam. Quisque urna
+                            turpis, euismod sed elementum vel, pellentesque eu
+                            eros. Orci varius natoque penatibus et magnis dis
+                            parturient montes, nascetur ridiculus musc.
+                          </p>
+                        </div>
+                      </>
+                    );
+                  } else if (rooms.roomType === "Double") {
+                    return (
+                      <>
+                        {/* Room details Double*/}
+                        <div className="room__details-right-content">
+                          <h3 className="mb-25">
+                          Double Room is the best online room for luxury
+                            hotels
+                          </h3>
+                          <p className="mb-25">
+                            Praesent non ullamcorper ligula. Proin a mi vitae
+                            massa lacinia sollicitudin eget eu ante. Lorem ipsum
+                            dolor sit amet, consectetur adipiscing elit.
+                            Pellentesque consectetur rhoncus lobortis. Curabitur
+                            sit amet velit sagittis, pellentesque diam euismod,
+                            faucibus quam. Cras non rhoncus ipsum. Quisque
+                            mattis arcu metus, a fermentum justo semper in.
+                            Aliquam egestas metus at nunc aliquam
+                          </p>
+                          <p className="m-0">
+                            id molestie ex ornare. Aliquam id arcu vel sem
+                            pretium porttitor non maximus diam. Quisque urna
+                            turpis, euismod sed elementum vel, pellentesque eu
+                            eros. Orci varius natoque penatibus et magnis dis
+                            parturient montes, nascetur ridiculus musc.
+                          </p>
+                          <div className="row mt-35 mb-35">
+                            <div className="col-sm-6 sm-mb-30">
+                              <img
+                                className="img__full"
+                                src="img/hotel/rooms/room1/room1_1.jpeg"
+                                alt=""
+                              />
+                            </div>
+                            <div className="col-sm-6">
+                              <img
+                                className="img__full"
+                                src="img/hotel/rooms/room1/room1-3.jpeg"
+                                alt=""
+                              />
+                            </div>
+                          </div>
+                          <h3 className="mb-25">
+                            Special check-in instructions
+                          </h3>
+                          <p className="mb-25">
+                            Praesent non ullamcorper ligula. Proin a mi vitae
+                            massa lacinia sollicitudin eget eu ante. Lorem ipsum
+                            dolor sit amet, consectetur adipiscing elit.
+                            Pellentesque consectetur rhoncus lobortis. Curabitur
+                            sit amet velit sagittis, pellentesque diam euismod,
+                            faucibus quam. Cras non rhoncus ipsum. Quisque
+                            mattis arcu metus, a fermentum justo semper in.
+                            Aliquam egestas metus at nunc aliquam
+                          </p>
+                          <p className="m-0">
+                            id molestie ex ornare. Aliquam id arcu vel sem
+                            pretium porttitor non maximus diam. Quisque urna
+                            turpis, euismod sed elementum vel, pellentesque eu
+                            eros. Orci varius natoque penatibus et magnis dis
+                            parturient montes, nascetur ridiculus musc.
+                          </p>
+                        </div>
+                      </>
+                    );
+                  } else {
+                    return (
+                      <>
+                        {/* Room details family*/}
+                        <div className="room__details-right-content">
+                          <h3 className="mb-25">
+                            family Room is the best online room for luxury
+                            hotels
+                          </h3>
+                          <p className="mb-25">
+                            Praesent non ullamcorper ligula. Proin a mi vitae
+                            massa lacinia sollicitudin eget eu ante. Lorem ipsum
+                            dolor sit amet, consectetur adipiscing elit.
+                            Pellentesque consectetur rhoncus lobortis. Curabitur
+                            sit amet velit sagittis, pellentesque diam euismod,
+                            faucibus quam. Cras non rhoncus ipsum. Quisque
+                            mattis arcu metus, a fermentum justo semper in.
+                            Aliquam egestas metus at nunc aliquam
+                          </p>
+                          <p className="m-0">
+                            id molestie ex ornare. Aliquam id arcu vel sem
+                            pretium porttitor non maximus diam. Quisque urna
+                            turpis, euismod sed elementum vel, pellentesque eu
+                            eros. Orci varius natoque penatibus et magnis dis
+                            parturient montes, nascetur ridiculus musc.
+                          </p>
+                          <div className="row mt-35 mb-35">
+                            <div className="col-sm-6 sm-mb-30">
+                              <img
+                                className="img__full"
+                                src="img/hotel/rooms/room1/room1_1.jpeg"
+                                alt=""
+                              />
+                            </div>
+                            <div className="col-sm-6">
+                              <img
+                                className="img__full"
+                                src="img/hotel/rooms/room1/room1-3.jpeg"
+                                alt=""
+                              />
+                            </div>
+                          </div>
+                          <h3 className="mb-25">
+                            Special check-in instructions
+                          </h3>
+                          <p className="mb-25">
+                            Praesent non ullamcorper ligula. Proin a mi vitae
+                            massa lacinia sollicitudin eget eu ante. Lorem ipsum
+                            dolor sit amet, consectetur adipiscing elit.
+                            Pellentesque consectetur rhoncus lobortis. Curabitur
+                            sit amet velit sagittis, pellentesque diam euismod,
+                            faucibus quam. Cras non rhoncus ipsum. Quisque
+                            mattis arcu metus, a fermentum justo semper in.
+                            Aliquam egestas metus at nunc aliquam
+                          </p>
+                          <p className="m-0">
+                            id molestie ex ornare. Aliquam id arcu vel sem
+                            pretium porttitor non maximus diam. Quisque urna
+                            turpis, euismod sed elementum vel, pellentesque eu
+                            eros. Orci varius natoque penatibus et magnis dis
+                            parturient montes, nascetur ridiculus musc.
+                          </p>
+                        </div>
+                      </>
+                    );
+                  }
+                })()}
+
+                {/* section 01 Room details */}
+
+                {/* section 02 Amenities */}
                 <div className="room__details-right-list">
                   <h3>Amenities</h3>
                   <div className="row mt-35">
@@ -101,7 +268,7 @@ const Roomdetailscontainer = () => {
                           <img src="/img/icon/list-1.png" alt="" />
                         </div>
                         <div className="room__details-right-list-item-title">
-                          <h6>Room Cleanig</h6>
+                          <h6>Room Cleaning</h6>
                         </div>
                       </div>
                     </div>
@@ -187,6 +354,8 @@ const Roomdetailscontainer = () => {
                     </div>
                   </div>
                 </div>
+
+                {/* section 03 */}
                 <div className="room__details-right-faq mt-50">
                   <div id="accordionExamplePage">
                     {faqOne?.map((data, id) => (

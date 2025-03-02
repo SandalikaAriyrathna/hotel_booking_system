@@ -34,13 +34,12 @@ export default function Footer() {
               <div className="footer__area-widget-about">
                 <div className="footer__area-widget-about-logo">
                   {/* Company logo */}
-                  <Link href="/"><img src="/logo.png" alt="logo" /></Link>
+                  <Link href="/">
+                    <img src="/logo.png" alt="logo" />
+                  </Link>
                 </div>
                 {/* Company description */}
-                <p>
-                Book hotel rooms & get deals For the Best Price
-
-                </p>
+                <p>Book hotel rooms & get deals For the Best Price</p>
                 <div className="footer__area-widget-about-social">
                   <Social />
                 </div>
@@ -86,8 +85,13 @@ export default function Footer() {
                 </ul>
               </div>
             </div>
+            <br />
+            <div className="footer__area-widget">
+              <Link href="/adminmanage/signup">
+                <h5>Elite Access</h5>
+              </Link>
+            </div>
           </div>
-       
         </div>
       </div>
       <div className="copyright__area">
@@ -95,7 +99,9 @@ export default function Footer() {
           <div className="row align-items-center">
             <div className="col-xl-6 col-lg-6 col-md-7 md-mb-10">
               <div className="copyright__area-left md-t-center">
-                  <p>Copyright © 2024 Website by<Link href="/"> IMA</Link></p>
+                <p>
+                  Copyright © 2024 Website by<Link href="/"> IMA</Link>
+                </p>
               </div>
             </div>
             <div className="col-xl-6 col-lg-6 col-md-5">
